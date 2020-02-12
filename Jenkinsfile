@@ -1,25 +1,26 @@
 pipeline {
-  agent any
-  stages {
-    stage('Build') {
-      steps {
-        bat 'mvn clean'
-      }
-    }
-    stage('Test') {
-      steps {
-        bat 'mvn test'
-      }
-    }
-    stage('Deploy') {
-      steps {
-        bat 'mvn package'
-      }
-    }
-    stage('report') {
-      steps {
-        cucumber fileIncludePattern: '**/*.json', sortingMethod: 'ALPHABETICAL'
-      }
-    }
-  }
+    agent any 
+            stages{
+                 stage ('Build'){
+                              steps { 
+                                  echo "This is build stage"
+                  bat "rm -rf springExample
+                  bat "mvn clean -f springExample" 
+                                 }
+                 }
+           
+                 stage ('Test'){
+                              steps { 
+                                  echo "This is test stage"
+                  bat "mvn test -f springExample"
+                                 }
+                 }
+           
+                 stage ('Deploy'){
+                              steps { 
+                                  echo "This is deploystage"
+                  bat "mvn package -f springExample"
+                                 }
+                 }
+           
 }
